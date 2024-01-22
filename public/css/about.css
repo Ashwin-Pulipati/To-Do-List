@@ -1,0 +1,116 @@
+/* Reset default margin and padding */
+body,
+h2,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set a background color and font family */
+body {
+  font-family: "Times New Roman", Arial, sans-serif;
+  background-color: #333;
+  color: #000000;
+}
+
+/* Center the content both vertically and horizontally */
+.container {
+  margin: 0 40px; /* Add space to both sides */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Style the header */
+h2 {
+  color: white;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+h2.about i {
+  margin-right: 10px;
+  color: orange;
+}
+
+/* Style the main content */
+.content {
+  background-color: rgba(255, 255, 255, 0.97);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(242, 241, 241, 0.2);
+  padding: 20px;
+  max-width: 600px;
+  text-align: justify; /* Justify the text */
+}
+
+/* Add space above the first paragraph */
+.content p:first-child {
+  margin-top: 15px;
+}
+
+/* Add space between paragraphs */
+.content p {
+  margin-bottom: 15px;
+  font-size: large;
+}
+
+/* Add responsiveness for smaller screens */
+@media screen and (max-width: 600px) {
+  h2 {
+    font-size: 24px;
+  }
+
+  .container {
+    margin: 0 10px; /* Adjust the side margins for smaller screens */
+  }
+
+  .content {
+    padding: 15px;
+  }
+}
+
+.header {
+  width: 100%;
+  height: 60px;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
+.header h1 img {
+  width: 50px;
+  height: 60px;
+  margin-right: 10px;
+}
+
+h2 {
+  color: white;
+}
+@media (max-width: 768px) {
+  .header {
+    width: 85%;
+    height: 60px;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+  }
+
+  .header h1 img {
+    width: 35px;
+    height: 45px;
+    margin-right: 10px;
+  }
+}

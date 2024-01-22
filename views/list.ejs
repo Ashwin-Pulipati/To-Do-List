@@ -1,0 +1,269 @@
+<%- include('header'); -%>
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="Search custom lists..." oninput="handleSearchChange()">
+  <button onclick="searchCustomLists()"><i class="fas fa-search"></i></button>
+</div>
+
+<div>
+  <div class="header">
+    <h1>
+      <img src="/css/images/logo.png" alt="Logo">
+      <h1><%= defaultList.title %></h1>
+    </h1>
+
+    <div class="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+  </div>
+    
+    <div class="add-new-list">
+      <form action="/customListName" method="post">
+        <input type="text" name="customListTitle" placeholder="Custom List Title" />
+        <button type="submit" name="newList"><i class="fa-solid fa-pencil"></i></button>
+      </form>
+    </div>
+</div>
+
+</div>
+<div class="menu">
+<ul>
+  <li><a href="/"><i class="fa-solid fa-house"></i>Home</a></li>
+  <li><a href="/help" ><i class="fa-solid fa-headset"></i>Help</a></li>
+  <li><a href="/contact" ><i class="fa-solid fa-phone"></i>Contact</a></li>
+  <li><a href="/about" ><i class="fa fa-info-circle" aria-hidden="true"></i>About</a></li>
+</ul>
+
+</div>
+
+  <% Object.keys(groupedLists).forEach((formattedDate) => { %>
+    <div class="date-container">
+    <h2 class="date-header text-center">
+      <%= formattedDate %>
+      <button class="delete-date-button" onclick="deleteDate('<%= Date.parse(formattedDate) %>')"><i class="fa-solid fa-trash"></i></button>
+    </h2>
+  </div>
+    <div class="custom-list-container">
+      <% groupedLists[formattedDate].forEach((list) => { %>
+        <div class="custom-list-card" id="list-<%= list._id %>">
+          <h3 contenteditable="true" onblur="handleEdit('<%= list._id %>', this)"><%= list.title %></h3>
+
+          <ul>
+            <% list.items.forEach((item, index) => { %>
+              <form action="/customList/<%= encodeURIComponent(list.title) %>" method="post">
+                <input type="checkbox" name="checkbox" onchange="this.form.submit()" />
+                <%= item %>
+                <input type="hidden" name="itemIndex" value="<%= index %>" />
+              </form>
+            <% }) %>
+          </ul>
+        
+
+          <form action="/" method="post">
+            <input type="hidden" name="listName" value="<%= list.title %>" />
+            <input type="text" name="listItemInput" placeholder="New Item" />
+            <button type="submit" name="addItemToList"><i class="fa-solid fa-plus"></i></button>
+          </form>
+        
+          <% if (list.title === activeListName) { %>
+            <% if (activeList && activeList.deletedItems && activeList.deletedItems.length >0) { %>
+              <details>
+                <summary>Deleted Items</summary>
+                <ul>
+                  <% activeList.deletedItems.forEach((item, index) => { %>
+                    <li>
+                      <input type="checkbox" name="deletedItem" value="<%= index %>" />
+                      <%= item %>
+                    </li>
+                  <% }) %>
+                </ul>
+                <button type="button" name="restoreButton" onclick="restoreItems('<%= encodeURIComponent(list.title) %>')">Restore</button>
+              </details>
+            <% } else { %>
+              <details>
+                <summary>Deleted Items</summary>
+                <ul>
+                  <li>No deleted items.</li>
+                </ul>
+              </details>
+            <% } %>
+
+            <div class="button-container">
+              <button type="button" name="deleteButton" onclick="deleteList('<%= list._id %>')">Delete List</button>
+            </div>
+            
+          <% } else { %>
+            <details>
+              <summary>Deleted Items</summary>
+              <ul>
+                <% list.deletedItems.forEach((item, index) => { %>
+                  <li>
+                    <input type="checkbox" name="deletedItem" value="<%= index %>" />
+                    <%= item %>
+                  </li>
+                <% }) %>
+              </ul>
+              <button type="button" name="restoreButton" onclick="restoreItems('<%= encodeURIComponent(list.title) %>')">Restore</button>
+            </details>
+
+            <div class="button-container">
+              <button type="button" name="deleteButton" onclick="deleteList('<%= list._id %>')">Delete List</button>
+            </div>
+
+          <% } %>
+      </div>
+      <% }) %>
+  </div>
+  
+  <% }) %>
+
+  <br>
+
+  <form id="restoreForm" action="/restoreItems" method="post">
+    <input type="hidden" name="listName" value="<%= activeListName %>" />
+    <input type="hidden" name="deletedItemIndexes" id="deletedItemIndexes" />
+    <input type="hidden" name="listId" id="listId" />
+  </form>
+</div>
+<%- include('footer'); -%>
+
+
+<script>
+  function restoreItems(listName) {
+    const deletedItemCheckboxes = document.querySelectorAll('input[name="deletedItem"]:checked');
+    const deletedItemIndexes = Array.from(deletedItemCheckboxes).map((checkbox) => checkbox.value);
+    if (deletedItemIndexes.length > 0) {
+      const deletedItemIndexesInput = document.getElementById('deletedItemIndexes');
+      deletedItemIndexesInput.value = JSON.stringify(deletedItemIndexes);
+      document.getElementById('restoreForm').action = '/restoreItems/' + encodeURIComponent(listName);
+      document.getElementById('restoreForm').submit();
+    }
+  }
+
+  function deleteList(listId) {
+    if (confirm('Are you sure you want to delete this list?')) {
+      const form = document.createElement('form');
+      form.method = 'post';
+      form.action = '/deleteList/' + listId;
+
+      document.body.appendChild(form);
+      form.submit();
+    }
+  }
+
+  function handleEdit(listId, element) {
+  const newTitle = element.innerText;
+  console.log('newTitle:', newTitle); // Add this line for debugging
+  // Send the new title to the server using an AJAX request
+  fetch(`/updateListTitle/${listId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ newTitle }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        console.log('Title updated successfully.');
+        // Update the content of the <h3> element with the new title
+        element.innerText = newTitle;
+      } else {
+        console.error('Title update failed.');
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
+function searchCustomLists() {
+  const searchInput = document.getElementById('searchInput');
+  const searchTerm = searchInput.value.toLowerCase(); // Convert search query to lowercase for case-insensitive search
+
+  // Loop through the custom lists and hide or show them based on the search query
+  document.querySelectorAll('.custom-list-card').forEach((card) => {
+    const title = card.querySelector('h3').innerText.toLowerCase();
+    if (title.includes(searchTerm)) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+let currentSearchTerm = ''; // Initialize the current search term
+
+function handleSearchChange() {
+  const searchInput = document.getElementById('searchInput');
+  const searchTerm = searchInput.value.trim().toLowerCase(); // Remove leading/trailing whitespace and convert to lowercase
+
+  // Check if the current search term starts with the new search term
+  if (searchTerm.startsWith(currentSearchTerm)) {
+    // If it does, filter the visible custom lists further
+    filterCustomLists(searchTerm);
+  } else {
+    // If it doesn't, reset the view to display all custom lists
+    resetView();
+  }
+
+  currentSearchTerm = searchTerm; // Update the current search term
+}
+
+function filterCustomLists(searchTerm) {
+  // Loop through the custom lists and hide or show them based on the search query
+  document.querySelectorAll('.custom-list-card').forEach((card) => {
+    const title = card.querySelector('h3').innerText.toLowerCase();
+    if (title.includes(searchTerm)) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+function deleteDate(timestamp) {
+    if (confirm(`Are you sure you want to delete all lists for this date?`)) {
+      const form = document.createElement('form');
+      form.method = 'post';
+      form.action = '/deleteDate/' + encodeURIComponent(timestamp);
+
+      document.body.appendChild(form);
+      form.submit();
+    }
+  }
+
+function resetView() {
+  // Show all custom lists when the search query is cleared
+  document.querySelectorAll('.custom-list-card').forEach((card) => {
+    card.style.display = 'block';
+  });
+}
+
+var menuVisible = false;
+var hamburgerMenu = document.querySelector(".hamburger-menu");
+var menu = document.querySelector(".menu");
+
+hamburgerMenu.addEventListener("click", function () {
+    if (!menuVisible) {
+        menu.style.left = "0";
+        menuVisible = true;
+        for (var i = 0; i < 3; i++) {
+            hamburgerMenu.children[i].classList.add("active-bar");
+        }
+    } else {
+        menu.style.left = "-200px";
+        menuVisible = false;
+        for (var i = 0; i < 3; i++) {
+            hamburgerMenu.children[i].classList.remove("active-bar");
+        }
+    }
+});
+</script>
+

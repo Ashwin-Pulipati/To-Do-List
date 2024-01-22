@@ -1,0 +1,661 @@
+body {
+  background-color: #333;
+}
+
+.header {
+  width: 100%;
+  height: 60px;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.header h1 {
+  margin: 0;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+
+.header h1 img {
+  width: 50px;
+  height: 60px;
+  margin-right: 10px;
+}
+
+h2 {
+  color: white;
+}
+@media (max-width: 768px) {
+  .header {
+    width: 85%;
+    height: 60px;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+  }
+
+  .header h1 img {
+    width: 35px;
+    height: 45px;
+    margin-right: 10px;
+  }
+}
+
+.add-new-list form {
+  display: flex;
+  align-items: center; /* Vertically align items */
+}
+
+.add-new-list input[type="text"] {
+  padding: 5px;
+  margin-top: 6px;
+  width: 200px;
+  border: 4px solid transparent;
+  border-color: #62ee4a;
+  border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+  background: none;
+}
+
+.add-new-list button {
+  background-color: #62ee4a;
+  color: #fff;
+  border: none;
+  padding: 9px 9px;
+  margin-top: 6px;
+  cursor: pointer;
+  border-bottom-right-radius: 7px;
+  border-top-right-radius: 7px;
+  margin-right: 10px; /* Add some right margin to push the button left */
+}
+
+.add-new-list input[type="text"] {
+  color: white;
+}
+
+/* Add the following media query for smaller screens */
+@media (max-width: 768px) {
+  .add-new-list form {
+    display: flex;
+    align-items: center; /* Vertically align items */
+  }
+
+  .add-new-list input[type="text"] {
+    padding: 5px;
+    margin-top: 6px;
+    width: 100px;
+    border: 4px solid transparent;
+    border-color: #62ee4a;
+    border-bottom-left-radius: 7px;
+    border-top-left-radius: 7px;
+    background: none;
+  }
+
+  .add-new-list button {
+    background-color: #62ee4a;
+    color: #fff;
+    border: none;
+    padding: 9px 9px;
+    margin-top: 6px;
+    cursor: pointer;
+    border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px;
+    margin-right: 10px; /* Add some right margin to push the button left */
+  }
+
+  .add-new-list input[type="text"] {
+    color: white;
+  }
+}
+
+.search-container button:hover {
+  background-color: #555;
+}
+
+/* Search container styles */
+.search-container {
+  position: absolute;
+  top: 75px;
+  right: 10px;
+  display: flex;
+  align-items: center; /* Vertically align items */
+}
+
+.search-container input[type="text"] {
+  padding: 5px;
+  width: 200px;
+  border: 4px solid transparent;
+  border-color: rgb(72, 252, 255);
+  border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+  background: none;
+}
+
+.search-container button {
+  background-color: rgb(72, 252, 255);
+  color: #fff;
+  border: none;
+  padding: 9px 10px;
+  cursor: pointer;
+  border-bottom-right-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.search-container button:hover {
+  background-color: #555;
+}
+
+.search-container input[type="text"] {
+  color: white;
+}
+
+/* Add the following media query for smaller screens */
+@media (max-width: 768px) {
+  .search-container {
+    position: absolute;
+    top: 73px;
+    right: 10px;
+    display: flex;
+    align-items: center; /* Vertically align items */
+  }
+
+  .search-container input[type="text"] {
+    padding: 5px;
+    width: 100px;
+    border: 4px solid transparent;
+    border-color: rgb(72, 252, 255);
+    border-bottom-left-radius: 7px;
+    border-top-left-radius: 7px;
+    background: none;
+  }
+
+  .search-container button {
+    background-color: rgb(72, 252, 255);
+    color: #fff;
+    border: none;
+    padding: 9px 10px;
+    cursor: pointer;
+    border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+
+  .search-container button:hover {
+    background-color: #555;
+  }
+
+  .search-container input[type="text"] {
+    color: white;
+  }
+}
+/* Custom List Container styles */
+.custom-list-card {
+  background-color: #f5f5f5; /* Background color */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  margin: 20px;
+  padding: 15px;
+  transition: transform 0.2s; /* Add a subtle transition effect */
+  max-width: 15%; /* Set the maximum width as a percentage of the container */
+}
+
+/* Hover effect for custom list cards */
+.custom-list-card:hover {
+  transform: scale(1.02); /* Slightly scale up on hover */
+}
+
+/* Header styles for custom list cards */
+.custom-list-card h3 {
+  color: #333; /* Text color */
+  font-size: 20px; /* Font size */
+  text-align: center;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+/* List Item styles */
+.custom-list-card ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.custom-list-card ul li {
+  margin: 5px 0;
+}
+
+/* Ripple effect for buttons with linear gradient styling */
+.custom-list-card button {
+  background: linear-gradient(
+    to right,
+    #ff416c,
+    #ff4b2b
+  ); /* Gradient background */
+  color: #fff; /* Text color */
+  border: none;
+  padding: 8px 13px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s; /* Add transition effect to the background */
+  margin-top: 5px;
+}
+
+.custom-list-card button:hover {
+  background: linear-gradient(
+    to right,
+    #ff4b2b,
+    #ff416c
+  ); /* Gradient background on hover */
+}
+
+/* Deleted Items details styles */
+.custom-list-card details {
+  margin-top: 10px;
+}
+
+/* Deleted Items list styles */
+.custom-list-card details ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.custom-list-card details ul li {
+  margin: 5px 0;
+}
+
+/* Button container styles */
+.button-container {
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* Reduce space between Add New Item input and + button */
+/* Centering the listItemInput input */
+.custom-list-card input[name="listItemInput"] {
+  display: block; /* Make it a block element */
+  margin: 0 auto; /* Center the input horizontally */
+  width: 60%; /* Adjust the width as needed */
+  padding: 5px; /* Add some padding for spacing */
+}
+
+/* Centering the listItemInput input and positioning the addItemToList button */
+.custom-list-card form {
+  display: flex;
+  align-items: center;
+}
+
+.custom-list-card input[name="listItemInput"] {
+  display: block;
+  width: 100%; /* Adjust the width as needed */
+  padding: 5.5px; /* Add padding for spacing */
+  border: 4px solid transparent;
+  border-image: linear-gradient(white, white),
+    linear-gradient(to right, #ff6b81, #ff5e8a, #ff5193, #ff449c, #ff37a5);
+  border-image-slice: 1;
+  border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+  background: none;
+  background-clip: padding-box;
+  background-image: linear-gradient(white, white),
+    linear-gradient(
+      315deg,
+      rgb(236, 160, 255),
+      rgb(170, 178, 255),
+      rgb(132, 255, 201)
+    );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  animation: bg-hue 2s linear infinite;
+}
+
+/* @keyframes for the gradient animation */
+@keyframes bg-hue {
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+.custom-list-card button[name="addItemToList"] {
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  color: #fff;
+  border: none;
+  padding: 9.5px 16px;
+  cursor: pointer;
+  border-radius: 0px;
+  transition: background 0.3s;
+  margin-left: 0px; /* Adjust the margin to reduce the gap */
+  margin-bottom: 5px;
+  border-bottom-right-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.custom-list-card button[name="addItemToList"]:hover {
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+}
+
+/* Different linear gradient colors for the restore button */
+.custom-list-card button[name="restoreButton"] {
+  background: linear-gradient(
+    to right,
+    #47f87c,
+    #56c2e2
+  ); /* Gradient background with different colors */
+  color: #fff; /* Text color */
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s; /* Add transition effect to the background */
+  margin-left: 10px; /* Add some space to separate the input and button */
+}
+
+.custom-list-card button[name="restoreButton"]:hover {
+  background: linear-gradient(
+    to right,
+    #56c2e2,
+    #47f87c
+  ); /* Different gradient background on hover */
+}
+
+.custom-list-card button[name="deleteButton"] {
+  background: linear-gradient(
+    to right,
+    #ae80ef,
+    #ef6ee0
+  ); /* Gradient background with different colors */
+  color: #fff; /* Text color */
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s; /* Add transition effect to the background */
+  margin-left: 10px; /* Add some space to separate the input and button */
+}
+
+.custom-list-card button[name="deleteButton"]:hover {
+  background: linear-gradient(
+    to right,
+    #ef6ee0,
+    #ae80ef
+  ); /* Different gradient background on hover */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .custom-list-card {
+    max-width: calc(60% - 10px);
+  }
+}
+
+/* Hamburger menu styles */
+.hamburger-menu {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  position: fixed;
+  left: 20px;
+  top: 12px;
+  z-index: 9999;
+}
+
+.bar {
+  width: 30px;
+  height: 4px;
+  background-color: #ffffff;
+  margin: 4px 0;
+  transition: 0.4s;
+  border-radius: 10px;
+}
+
+/* Menu styles */
+.menu {
+  position: fixed;
+  left: -200px;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  background-color: #625f5f;
+  overflow-y: auto;
+  transition: 0.3s;
+  z-index: 2;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0px;
+  margin-top: 60px;
+  margin-left: 30px;
+}
+
+.menu ul li {
+  padding: 10px 20px;
+  text-align: left;
+  position: relative;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  display: block;
+  transition: 0.2s;
+  padding: 0;
+}
+
+.menu ul li a i {
+  margin-right: 5px;
+  color: orange;
+}
+
+.menu ul li a:hover {
+  color: orange;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.menu ul li a:hover i {
+  color: #fff;
+}
+
+.active-bar:nth-child(1) {
+  background-color: #ffffff;
+  transform: rotate(-45deg) translate(-11px, 6px);
+  border-radius: 10px;
+}
+
+.active-bar:nth-child(2) {
+  opacity: 0;
+  border-radius: 10px;
+}
+
+.active-bar:nth-child(3) {
+  background-color: #ffffff;
+  transform: rotate(45deg) translate(-11px, -6px);
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  /* Hamburger menu styles */
+  .hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    z-index: 9999;
+  }
+}
+
+/* Footer Styles */
+footer {
+  position: relative; /* or any appropriate value */
+  bottom: 0;
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 14px;
+  width: 100%;
+  z-index: 1; /* Increase z-index */
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-icons {
+  margin-bottom: 10px;
+}
+
+.social-icons a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  margin: 0 10px;
+}
+
+.copyright {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copyright i {
+  margin: 0 5px;
+}
+
+.scrolled footer {
+  background-color: #ffffff;
+}
+
+/* Additional Styles for Responsive Design */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+  }
+
+  .social-icons {
+    margin-top: 10px;
+  }
+
+  .copyright {
+    margin-top: 10px;
+  }
+}
+
+/* Envelope */
+.fa.fa-envelope {
+  font-size: 1.5em;
+  background-image: linear-gradient(45deg, #0072c6, #00a0df);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Instagram */
+.fa-brands.fa-instagram {
+  font-size: 1.5em;
+  background-image: linear-gradient(
+    45deg,
+    #405de6,
+    #5851db,
+    #833ab4,
+    #c13584,
+    #e1306c,
+    #fd1d1d
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Telegram */
+.fa-brands.fa-telegram {
+  font-size: 1.5em;
+  background-image: linear-gradient(45deg, #0088cc, #00a8e8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* GitHub */
+.fa-brands.fa-github {
+  font-size: 1.5em;
+  background-image: linear-gradient(45deg, #24292e, #b5a3d0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Twitter */
+.fab.fa-twitter {
+  font-size: 1.5em;
+  background-image: linear-gradient(45deg, #1da1f2, #1da1f2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* LinkedIn */
+.fa-brands.fa-linkedin-in {
+  font-size: 1.5em;
+  background-image: linear-gradient(45deg, #0077b5, #0077b5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.copyright a {
+  text-decoration: none;
+  color: #ed90ea;
+}
+
+.copyright a:hover {
+  color: #66f7fe;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Style for the date container */
+.date-container {
+  margin-bottom: 20px;
+}
+
+/* Style for the date header including the "Delete Date" button */
+.date-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Style for the date text inside the date header */
+.date-header h2 {
+  margin: 0;
+}
+
+/* Style for the "Delete Date" button */
+.delete-date-button {
+  background-color: #333;
+  color: orange;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+  margin-left: 5px;
+}
+
+.delete-date-button:hover {
+  background-color: lightyellow;
+}
